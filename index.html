@@ -1,11 +1,175 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1 style="color: red;text-align: center;">Aur tope, kaisi lagi website  TOPA</h1>
-</body>
+<script>
+    function showresult(){
+    var gend=''
+    if (male.checked)
+    {
+        gend='Son'
+    }
+    else
+    {
+        gend='Daughter'
+    }
+
+    var total=0
+//    list of marks entered by user
+    var mark=[parseInt(hindi.value),parseInt(english.value),parseInt(physics.value),parseInt(chemistry.value),parseInt(maths.value)]
+//    list of subjects in order with marks to print in single statement
+    var sub=["Hindi","English","Physics","Chemistry","Maths"]
+//    first table to be printed of logo and boardname
+    var table1="<table bgcolor='#6c5ce7' width='100%'>"
+    table1+="<tr><td><img src='cbselogo.jpg' width='45%' height='45%'></td><td><h1>Central Board Of Secondary Education</h1></td></tr></table>"
+    heading.innerHTML=table1
+//    counter to count the number of subjects in which student is failed
+    var count=0
+//    second table to be printed of rollno, schoolname, name and father's name
+    var table2="<table width='100%' bgcolor='#1dd1a1' cellpadding='20'>"
+    table2+=`<tr><td><b><font size='5'>Roll Number: ${rollno.value}</font></b></td><td><td><b><font size='5'>${schoolname.value}</font></b></td></tr>`
+    table2+=`<tr><td><b><font size='5'>${sname.value} ${gend} of ${fathersname.value}</font></b></td></tr></table>`
+    heading2.innerHTML=table2
+//    final table of marks (only giving the headings)
+    var table3="<table width='100%' border='1' cellpadding='10' cellspacing='0' bgcolor='#1dd1a1'>"
+    table3+=`<tr><td>Code:</td><td>Subject</td><td>Min. marks</td><td>Max. marks</td><td>Obtained</td><td>Remarks</td></tr>`
+//    var to store remarks
+    var rem=''
+//    var to store name of failed subjects
+    var fsub=''
+//    for loop to check for grades , count,and finally adding rows to the table , one subject in one iteration
+    for(i=0;i<mark.length;i++)
+    {
+        if(mark[i]>90)
+        {
+            rem='A'
+        }
+        else if(mark[i]>80 && mark[i]<=90)
+        {
+            rem='B'
+        }
+        else if(mark[i]<33)
+        {
+//        adding names of failed subjects + counting
+            fsub+=sub[i]+","
+            count++
+            rem='<font color="red">*</font>'
+        }
+        else
+        {
+            rem='C'
+        }
+
+        total+=mark[i]
+
+        table3+=`<tr><td>${i}</td><td>${sub[i]}</td><td>33</td><td>100</td><td>${mark[i]}</td><td>${rem}</td></tr>`
+    }
+
+    var per=total/5
+//    condition and var to print result
+    if(count==1||count==2)
+    {
+        var res=`Compartment (${fsub})`
+    }
+    else if (count>2)
+    {
+        var res='FAIL'
+    }
+    else
+    {
+        var res='PASS'
+    }
+// last row to show the final results
+    table3+=`<tr><table cellspacing='5' bgcolor='#1dd1a1' width='100%'><tr><td>TOTAL:</td><td>${total}</td>
+    <td>PERCENTAGE:</td><td>${per}%</td><td>RESULT:</td><td>${res}</td></tr></table></tr></table>`
+
+    result.innerHTML=table3
+
+
+
+
+}
+</script>
+
+<html>
+
+<body background="bookbg.jpg"></body>
+<h1 style="color: rebeccapurple;">FOR PINKY</h1>
+<br><br>
+<center>
+
+    <table cellspacing="20" bgcolor="#81ecec">
+        <caption><h1>Student Record</h1></caption>
+        <tr>
+            <th>
+                <b>Roll no:</b><input type="text" id="rollno">
+            </th>
+        </tr>
+
+        <tr>
+            <th>
+                <b>Student's name:</b><input type="text" id="sname">
+            </th>
+        </tr>
+
+        <tr>
+            <th>
+                <b>School name:</b><input type="text" id="schoolname">
+            </th>
+        </tr>
+
+        <tr>
+            <th>
+                <b>Father's name:</b><input type="text" id="fathersname">
+            </th>
+        </tr>
+
+        <tr>
+            <td>
+                <b>Gender:</b>
+                <input type="radio" name="gender" id="male" value="m">Male
+                <input type="radio" name="gender" id="female" value="f">Female
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                <b>Hindi marks:</b><input type="text" id="hindi">
+            </th>
+        </tr>
+
+        <tr>
+            <th>
+                <b>English marks:</b><input type="text" id="english">
+            </th>
+        </tr>
+
+        <tr>
+            <th>
+                <b>Physics marks:</b><input type="text" id="physics">
+            </th>
+        </tr>
+
+        <tr>
+            <th>
+                <b>Chemistry marks:</b><input type="text" id="chemistry">
+            </th>
+        </tr>
+
+        <tr>
+            <th>
+                <b>Maths marks:</b><input type="text" id="maths">
+            </th>
+        </tr>
+
+        <tr>
+            <th>
+                <input type="button" value="Submit" onclick="showresult()">
+            </th>
+        </tr>
+
+    </table><br><br><br><br><br>
+
+    <div id="heading"></div>
+    <div id="heading2"></div>
+    <div id="result"></div>
+
+</center>
+
 </html>

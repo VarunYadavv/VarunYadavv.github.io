@@ -28,7 +28,7 @@ function generateSequence(){
     //     },100);
     // }
     $("#"+colour).fadeIn(100).fadeOut(100).fadeIn(100);
-    audio=new Audio("./sounds/"+colour+".mp3")
+    audio=new Audio(colour+".mp3")
     audio.play();
 
 }
@@ -43,7 +43,7 @@ $(".btn").click(function(){
 
     if(level!==0){
         playerSequence.push(colors.indexOf(color));
-        audio=new Audio("./sounds/"+color+".mp3")
+        audio=new Audio(color+".mp3")
         audio.play();
         $("#"+color).addClass("pressed");
         setTimeout(()=>{
@@ -65,7 +65,7 @@ function checkSequence(){
         
     }
     else{
-        audio=new Audio("./sounds/wrong.mp3")
+        audio=new Audio("wrong.mp3")
         audio.play();
         sequence=[]
         level=0
